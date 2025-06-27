@@ -6,8 +6,15 @@ import App from "./App";
 
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
 
-createRoot(document.getElementById("root")!).render(
-  <ConvexAuthProvider client={convex}>
-    <App />
-  </ConvexAuthProvider>
-);
+const rootElement = document.getElementById("root");
+
+if (rootElement) {
+  const root = createRoot(rootElement);
+  root.render(
+    <ConvexAuthProvider client={convex}>
+      <App />
+    </ConvexAuthProvider>
+  );
+} else {
+  console.error("Root element not found");
+}
